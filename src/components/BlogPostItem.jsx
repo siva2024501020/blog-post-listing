@@ -1,14 +1,16 @@
-import React from "react";
-import styles from "./BlogPostItem.module.css";
+import styles from './blogPostItem.module.css';
+import { Link } from 'react-router-dom';
 
-function BlogPostItem({ post }) {
+export default function BlogPostItem({ post }) {
   return (
     <div className={styles.card}>
-      <h2 className={styles.title}>{post.title}</h2>
-      <p className={styles.date}>{post.date}</p>
-      <p className={styles.description}>{post.description}</p>
+      <Link to={`/posts/${post.id}`} className={styles.link}>
+        <h2 className={styles.title}>{post.title}</h2>
+        <p className={styles.summary}>{post.summary}</p>
+        <div className={styles.meta}>
+          <span>{post.author}</span> | <span>{new Date(post.date).toDateString()}</span>
+        </div>
+      </Link>
     </div>
   );
 }
-
-export default BlogPostItem;
