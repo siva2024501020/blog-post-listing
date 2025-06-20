@@ -1,6 +1,6 @@
 import styles from './blogPostDetail.module.css';
 
-export default function BlogPostDetail({ post }) {
+export default function BlogPostDetail({ post, onDelete }) {
   if (!post) return <p className={styles.empty}>Post not found.</p>;
 
   return (
@@ -13,6 +13,9 @@ export default function BlogPostDetail({ post }) {
         className={styles.content}
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
+      <button className={styles.deleteButton} onClick={onDelete}>
+        Delete
+      </button>
     </article>
   );
 }
