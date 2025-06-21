@@ -1,5 +1,5 @@
 import React from 'react';
-import BlogPostList from './components/BlogPostList';
+import BlogPostList from './components/BlogPostList.jsx';
 
 const samplePosts = [
   {
