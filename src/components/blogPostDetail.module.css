@@ -39,3 +39,41 @@
   margin-top: 2rem;
   color: #888;
 }
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+    max-width: 100%;
+    margin: 0 0.5rem;
+  }
+  .title {
+    font-size: 1.3rem;
+  }
+  .meta {
+    font-size: 0.85rem;
+  }
+  .content {
+    font-size: 1rem;
+  }
+  .deleteButton {
+    width: 100%;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    padding: 0.75rem;
+  }
+}
+
+.deleteButton {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: background 0.2s;
+}
+
+.deleteButton:hover {
+  background: #c0392b;
+}
