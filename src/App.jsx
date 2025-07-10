@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useMemo } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import BlogPostList from './components/blogPostList'
+import BlogPostList from './components/BlogPostList'
 import BlogPostDetail from './components/blogPostDetails';
+import SearchBar from './components/SearchBar';
 
 
 // Sample blog data (you can move this to a JSON file or API later)
@@ -31,18 +32,35 @@ const posts = [
   },
 ];
 
+
 function App() {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Filter posts by title or content (case-insensitive)
+  const filteredPosts = useMemo(() => {
+    if (!searchQuery.trim()) return posts;
+    const q = searchQuery.trim().toLowerCase();
+    return posts.filter(post =>
+      (post.title && post.title.toLowerCase().includes(q)) ||
+      (post.summary && post.summary.toLowerCase().includes(q)) ||
+      (post.content && post.content.toLowerCase().includes(q))
+    );
+  }, [searchQuery]);
+
   return (
     <div>
+      <nav style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', padding: '1rem' }}>
+        <SearchBar onSearch={setSearchQuery} />
+      </nav>
       <Routes>
-        <Route path="/" element={<BlogPostList posts={posts} />} />
+        <Route path="/" element={<BlogPostList posts={filteredPosts} searchQuery={searchQuery} />} />
         <Route
           path="/posts/:id"
           element={<BlogPostDetailWrapper posts={posts} />}
         />
       </Routes>
     </div>
-  )
+  );
 }
 
 // A wrapper to find the post by ID from route params
